@@ -143,3 +143,21 @@ class File extends CI_Controller {
     }
 
 }
+
+
+--------------------------------------------------------------------------
+
+
+// Przykładowe zapytanie SQL
+$sql = "SELECT * FROM users WHERE status = 'active'";
+
+// Pobierz obiekt bazy danych
+$db = \Config\Database::connect();
+
+// Wykonaj zapytanie SQL
+$result = $db->query($sql);
+
+// Przetwórz wynik zapytania
+foreach ($result->getResult() as $row) {
+    echo $row->name;
+}
