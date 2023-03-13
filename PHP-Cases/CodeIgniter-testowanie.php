@@ -161,3 +161,5 @@ $result = $db->query($sql);
 foreach ($result->getResult() as $row) {
     echo $row->name;
 }
+
+ $dane = $this->request->getPost();
