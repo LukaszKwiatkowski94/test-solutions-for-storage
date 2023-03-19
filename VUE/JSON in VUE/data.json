@@ -1,0 +1,8 @@
+{
+  "title": "Moje dane",
+  "items": [
+    { "id": 1, "name": "Pierwszy element" },
+    { "id": 2, "name": "Drugi element" },
+    { "id": 3, "name": "Trzeci element" }
+  ]
+}
