@@ -1,0 +1,17 @@
+# Pobieramy obraz Node.js w wersji 18.x
+FROM node:18
+
+# Tworzymy katalog /app w kontenerze i ustawiamy go jako katalog roboczy
+WORKDIR /app
+
+# Kopiujemy pliki package.json i package-lock.json do katalogu /app w kontenerze
+COPY package*.json ./
+
+# Instalujemy zależności z plików package.json i package-lock.json
+RUN npm install
+
+# Kopiujemy resztę plików z katalogu projektu do katalogu /app w kontenerze
+COPY . .
+
+# Uruchamiamy serwer NestJS
+CMD ["npm", "start"]
