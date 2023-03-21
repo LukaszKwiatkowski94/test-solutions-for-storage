@@ -15,3 +15,30 @@ COPY . .
 
 # Uruchamiamy serwer NestJS
 CMD ["npm", "start"]
+
+
+-------------------
+FROM node:latest
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start:prod"]
+
+------------------------------------------
+
+docker build -t nazwa_obrazu .
+
+------------------------------------------
+
+docker run -p 3000:3000 nazwa_obrazu
+
