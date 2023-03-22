@@ -1,0 +1,14 @@
+docker network create app_network
+
+    ports:
+      - "3001:3001"
+    networks:
+      - app_network
+networks:
+  app_network:
+    external: true
+	
+	
+------------------------------
+docker run -d --name app2 --network app_network -p 3001:3001 your-app2-image
+
