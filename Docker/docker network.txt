@@ -12,3 +12,8 @@ networks:
 ------------------------------
 docker run -d --name app2 --network app_network -p 3001:3001 your-app2-image
 
+------------------------------
+
+networks:
+  my-network:
+    driver: bridge
