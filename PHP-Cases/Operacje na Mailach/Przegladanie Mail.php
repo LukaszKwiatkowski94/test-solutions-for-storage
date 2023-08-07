@@ -37,8 +37,5 @@ public function fetchAndSaveEmails(Request $request)
         // Zamknięcie połączenia
         imap_close($inbox);
 
-        // Tutaj możesz wykonać dodatkową logikę lub zapisać $messages w bazie danych, itp.
-        // Na razie zwrócimy tablicę z pobranymi wiadomościami jako odpowiedź JSON.
-
         return response()->json($messages);
     }
