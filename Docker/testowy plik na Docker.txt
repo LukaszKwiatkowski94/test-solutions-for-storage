@@ -1,0 +1,82 @@
+Dockerfile:
+
+# Wybierz odpowiedni obraz bazowy dla Nest.js
+FROM node:14
+
+# Ustaw katalog roboczy
+WORKDIR /usr/src/app
+
+# Skopiuj pliki zależne
+COPY package*.json ./
+
+# Zainstaluj zależności
+RUN npm install
+
+# Skopiuj resztę plików do katalogu roboczego
+COPY . .
+
+# Skompiluj aplikację
+RUN npm run build
+
+# Ustaw port, na którym działa aplikacja
+EXPOSE 3000
+
+# Uruchom aplikację
+CMD ["node", "dist/main.js"]
+
+
+package.json:
+
+{
+  "name": "nest-docker-example",
+  "version": "1.0.0",
+  "description": "Nest.js Docker Example",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "node dist/main.js",
+    "build": "tsc",
+    "prestart": "npm run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nestjs/common": "^8.0.0",
+    "@nestjs/core": "^8.0.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.0.0",
+    "typescript": "^4.4.3"
+  }
+}
+
+
+tsconfig.json
+
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "outDir": "./dist",
+    "target": "ES2017"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
+
+
+docker-compose.yml:
+
+version: "3"
+services:
+  nest-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nest-app
+    container_name: nest-container
+    ports:
+      - "3000:3000"
+    restart: always
+
+
+docker build -t nest-app 
