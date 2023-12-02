@@ -1,0 +1,13 @@
+<h1>{{name}}</h1>
+<br>
+<ul>
+    {{#each items}}
+        <li>{{this}}</li>
+    {{/each}}
+</ul>
+<br>
+{{#if isSpecial}}
+    <p>This is a special</p>
+{{else}}
+    <p>Just a normal</p>
+{{/if}}
