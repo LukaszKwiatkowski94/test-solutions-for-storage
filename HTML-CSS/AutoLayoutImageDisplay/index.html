@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .my-sign {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      width: 200px;
+      height: 50px;
+    }
+
+    .my-sign .background-image {
+      width: 30%;
+      height: auto;
+      min-width: 30%;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body>
+  <div class="my-sign" id="mySignContainer"></div>
+
+  <script>
+    // Sample images for dynamic display
+    const imageUrls = [
+      'images/img_1.png',
+      'images/img_2.png',
+      'images/img_3.png',
+      'images/img_4.png',
+      'images/img_5.png',
+      'images/img_6.png',
+      'images/img_7.png',
+      'images/img_8.png',
+      'images/img_9.png',
+      // ... more images
+    ];
+
+    // Function for dynamically populating the container with divs and background images
+    function populateMySign(images) {
+      const mySignContainer = document.getElementById('mySignContainer');
+      mySignContainer.innerHTML = ''; // Clear the container before adding new divs
+
+      images.forEach((imageUrl) => {
+        // Create div element for each URL
+        const divElement = document.createElement('div');
+        divElement.classList.add('background-image');
+        divElement.style.backgroundImage = `url('${imageUrl}')`;
+        mySignContainer.appendChild(divElement);
+      });
+    }
+
+    // Call the function with sample images
+    populateMySign(imageUrls);
+  </script>
+</body>
+</html>
