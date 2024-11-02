@@ -7,7 +7,7 @@ $pass = '';
 
 $dbh = new PDO('mysql:host=localhost;dbname=economy_test', $user, $pass);
 
-$sql = 'SELECT category FROM categories ORDER BY category ASC';
+$sql = 'SELECT DISTINCT name_ec as category FROM list_economy ORDER BY category ASC';
 
 $sth = $dbh->query($sql);
 

@@ -1,4 +1,4 @@
-const suggestions = [];
+let suggestions = [];
 const autocompleteList = document.getElementById("autocomplete-list");
 
 function categories(element)
@@ -44,6 +44,8 @@ async function list()
     const json = await response.json();
     
     let tab = document.getElementById('tab');
+    
+    let lastName = '';
 
     await json.forEach(element => {
         let tr = document.createElement('tr');
@@ -54,6 +56,8 @@ async function list()
 
         td = document.createElement('td');
         td.innerText = element.name_bill;
+        td.setAttribute('contenteditable',true);
+        td.setAttribute('id','name_bill_'+element.id);
         tr.append(td);
 
         td = document.createElement('td');
@@ -66,10 +70,16 @@ async function list()
                 categories(this)
             }
         });
+        if(lastName == element.name_ec && element.name_ec != ''){
+            td.style.backgroundColor = 'tomato';
+        }
+        lastName = element.name_ec;
         tr.append(td);
 
         td = document.createElement('td');
         td.innerText = element.place;
+        td.setAttribute('contenteditable',true);
+        td.setAttribute('id','name_place_'+element.id);
         tr.append(td);
 
         td = document.createElement('td');
@@ -88,6 +98,11 @@ async function list()
         let button = document.createElement('button');
         button.innerText = 'SAVE';
         button.setAttribute('data-id',element.id);
+
+        button.addEventListener('click',async function() {
+            await update(this);
+        });
+
         td.append(button);
         tr.append(td);
 
@@ -98,12 +113,22 @@ async function list()
 
 }
 
-function update()
+async function update(element)
 {
+    let id = element.getAttribute('data-id');
+    let value = document.getElementById('name_ec_'+id).innerText;
+    let bill = document.getElementById('name_bill_'+id).innerText;
+    let place = document.getElementById('name_place_'+id).innerText;
+
+    let response = await fetch("./endpoints/updateRow.php?id="+id+"&name="+value+"&bill="+bill+"&place="+place);
+
+    // only for new categories
+    setCategories();
 
 }
 
 async function setCategories() {
+    suggestions = [];
     let categoryList = await fetch("./endpoints/getCategories.php");
     const json = await categoryList.json();
 

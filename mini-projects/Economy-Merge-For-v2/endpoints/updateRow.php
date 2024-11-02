@@ -7,10 +7,12 @@ $pass = '';
 
 $dbh = new PDO('mysql:host=localhost;dbname=economy_test', $user, $pass);
 
-$sql = "UPDATE list_economy SET name_ec = ? WHERE id = ?";
+$sql = "UPDATE list_economy SET name_ec = ?, name_bill = ?, place = ? WHERE id = ?";
 
 $id = $_GET['id'];
 $name = $_GET['name'];
+$bill = $_GET['bill'];
+$place = $_GET['place'];
 
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$name, $id]);
+$stmt = $dbh->prepare($sql);
+$stmt->execute([$name, $bill, $place, $id]);

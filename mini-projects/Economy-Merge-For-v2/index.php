@@ -31,9 +31,9 @@
             position: absolute;
             border: 1px solid #d4d4d4;
             background-color: #ffffff;
-            max-height: 150px;
+            max-height: 250px;
             overflow-y: auto;
-            width: 200px;
+            width: 300px;
             z-index: 1000;
         }
 
