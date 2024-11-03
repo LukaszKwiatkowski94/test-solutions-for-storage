@@ -47,6 +47,8 @@ async function list()
     
     let lastName = '';
 
+    let counter = 1;
+
     await json.forEach(element => {
         let tr = document.createElement('tr');
 
@@ -107,9 +109,11 @@ async function list()
         tr.append(td);
 
         tab.append(tr);
+
+        counter++;
     });
 
-
+    console.log('Count: '+counter);
 
 }
 
