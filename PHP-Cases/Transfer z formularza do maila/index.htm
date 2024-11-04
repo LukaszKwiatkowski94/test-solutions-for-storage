@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload plików</title>
+</head>
+<body>
+    <h1>Wyślij pliki</h1>
+    
+    <!-- Kontener na dynamicznie tworzone inputy -->
+    <div id="file-input-container">
+        <input type="file" name="files[]" />
+    </div>
+    <button onclick="addFileInput()">Dodaj kolejny input</button>
+    <button onclick="sendFiles()">Wyślij pliki</button>
+
+    <script>
+        function addFileInput() {
+            const container = document.getElementById('file-input-container');
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.name = 'files[]';
+            container.appendChild(input);
+        }
+
+        async function sendFiles() {
+            const container = document.getElementById('file-input-container');
+            const formData = new FormData();
+
+            // Zbieramy każdy plik z pojedynczych inputów
+            container.querySelectorAll('input[type="file"]').forEach((input, index) => {
+                const file = input.files[0]; // Bierzemy pierwszy plik (jeden plik na input)
+                if (file) { 
+                    formData.append(`file_${index}`, file); // Dodajemy go do FormData z unikalnym kluczem
+                }
+            });
+
+            // Wysłanie plików za pomocą fetch
+            try {
+                const response = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert('Pliki wysłane pomyślnie!');
+                } else {
+                    alert('Błąd podczas wysyłania plików');
+                }
+            } catch (error) {
+                console.error('Błąd:', error);
+            }
+        }
+    </script>
+</body>
+</html>
