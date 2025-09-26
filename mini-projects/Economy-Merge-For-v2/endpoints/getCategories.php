@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 
 $user = 'root';
-$pass = '';
+$pass = 'password';
 
 $dbh = new PDO('mysql:host=localhost;dbname=economy_test', $user, $pass);
 
@@ -13,4 +13,4 @@ $sth = $dbh->query($sql);
 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-echo json_encode($result,true);
+echo json_encode($result, true);

@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 
 $user = 'root';
-$pass = '';
+$pass = 'password';
 
 $dbh = new PDO('mysql:host=localhost;dbname=economy_test', $user, $pass);
 
